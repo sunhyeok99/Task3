@@ -3,6 +3,7 @@ package com.example.Api.user.Entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,56 +15,58 @@ public class User {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "USER_NM", nullable = false)
-    private String user_nm;
+    @Column(name = "user_nm", nullable = false)
+    private String userNm;
 
-    @Column(name = "USER_ID", nullable = false)
-    private String user_id;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
     @Column(name = "PW", nullable = false)
     private String pw;
 
-    @Column(name = "REGI_DT")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date regi_dt;
+    @Column(name = "regi_dt")
+    private LocalDateTime regiDt;
 
-    @Column(name = "REGI_USER", nullable = false)
-    private String regi_user;
+    @Column(name = "regi_user", nullable = false)
+    private String regiUser;
 
-    @Column(name = "UPDA_DT")
-    private Date upda_dt;
+    @Column(name = "upda_dt")
+    private LocalDateTime updaDt;
 
-    @Column(name = "UPDA_USER")
-    private String upda_user;
+    @Column(name = "upda_user")
+    private String updaUser;
 
-    @Column(name = "USE_YN", nullable = false)
-    private String use_yn = "Y";
+    @Column(name = "use_yn", nullable = false)
+    private String useYn = "Y";
 
-    @PrePersist
-    public void prePersist() {
-        if (regi_dt == null) {
-            regi_dt = new Date();  // 현재 시간을 설정
-        }
-    }
     // 생성자
     public User() {
 
     }
-    public User(String user_nm, String user_id, String pw, Date regi_dt, String regi_user, String use_yn) {
-        this.user_nm = user_nm;
-        this.user_id = user_id;
+    public User(String userNm, String userId, String pw, LocalDateTime regiDt, String regiUser, String useYn) {
+        this.userNm = userNm;
+        this.userId = userId;
         this.pw = pw;
-        this.regi_dt = regi_dt;
-        this.regi_user = regi_user;
-        this.use_yn = use_yn;
+        this.regiDt = regiDt;
+        this.regiUser = regiUser;
+        this.useYn = useYn;
     }
-    public User(String user_nm, String user_id, String pw, String regi_user) {
-        this.user_nm = user_nm;
-        this.user_id = user_id;
+    public User(String userNm, String userId, String pw, String regiUser) {
+        this.userNm = userNm;
+        this.userId = userId;
         this.pw = pw;
-        this.regi_dt = new Date();
-        this.regi_user = regi_user;
-        this.use_yn = "Y";
+        this.regiDt = LocalDateTime.now();
+        this.regiUser = regiUser;
+        this.useYn = "Y";
+    }
+
+    public User(String userNm, String userId, String regiUser, String updaUser, LocalDateTime regiDt, LocalDateTime updaDt) {
+        this.userNm = userNm;
+        this.userId = userId;
+        this.regiUser = regiUser;
+        this.updaUser = updaUser;
+        this.regiDt = regiDt;
+        this.updaDt = updaDt;
     }
 
     // Getters
@@ -71,50 +74,50 @@ public class User {
         return id;
     }
 
-    public String getUser_nm() {
-        return user_nm;
+    public String getUserNm() {
+        return userNm;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
     public String getPw() {
         return pw;
     }
 
-    public Date getRegi_dt() {
-        return regi_dt;
+    public LocalDateTime getRegiDt() {
+        return regiDt;
     }
 
-    public String getRegi_user() {
-        return regi_user;
+    public String getRegiUser() {
+        return regiUser;
     }
 
-    public Date getUpda_dt() {
-        return upda_dt;
+    public LocalDateTime getUpdaDt() {
+        return updaDt;
     }
 
 
-    public String getUpda_user() {
-        return upda_user;
+    public String getUpdaUser() {
+        return updaUser;
     }
 
-    public String getUse_yn() {
-        return use_yn;
+    public String getUseYn() {
+        return useYn;
     }
 
     // 수정 메서드
     public void update(){
-        this.upda_user = this.regi_user;
-        this.upda_dt = new Date();
+        this.updaUser = this.regiUser;
+        this.updaDt = LocalDateTime.now();
     }
 
     // 삭제 메서드
     public void delete() {
-        this.upda_user = this.regi_user;
-        this.upda_dt = new Date();
-        this.use_yn = "N";
+        this.updaUser = this.regiUser;
+        this.updaDt = LocalDateTime.now();
+        this.useYn = "N";
     }
 
 }

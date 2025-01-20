@@ -11,7 +11,7 @@ public class UserDto {
     private String regiUser;
 
     // 생성자
-    public UserDto(String userNm, String userId, String pw, String regiUser, String useYn) {
+    public UserDto(String userNm, String userId, String pw, String regiUser) {
         this.userNm = userNm;
         this.userId = userId;
         this.pw = pw;
